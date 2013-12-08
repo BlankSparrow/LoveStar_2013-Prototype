@@ -40,6 +40,7 @@
     <Compile Include="LoveStar\Entity.cs" />
     <Compile Include="LoveStar\Level.cs" />
     <Compile Include="LoveStar\Player.cs" />
+    <Compile Include="LoveStar\Scarf.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Animation.cs" />
@@ -221,6 +222,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Pixel\Pixel.png" />
+    <Content Include="Content\Scarf\Section.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
     <Content Include="SDL.dll" />
   </ItemGroup>

@@ -118,6 +118,9 @@ namespace LoveStar.LoveStar
         private Tools.Animation LRRun_LLStep;
         private Tools.Animation LLRun_LRStep;
 
+        private LoveStar.Scarf scarf;
+        private Vector2 scarfPosition;
+
         public void setCanMove(bool canMoveRight, bool canMoveLeft)
         {
             this.canMoveRight = canMoveRight;
@@ -137,7 +140,9 @@ namespace LoveStar.LoveStar
             actionState = Action_State.stand;
             facingDirection = Facing_Direction.right;
             nextStep = Next_Step.right;
+            scarfPosition = position - new Vector2(0, -180);
 
+            scarf = new Scarf(game, position);
             setCanMove(true,true);
         }
 
@@ -146,6 +151,7 @@ namespace LoveStar.LoveStar
             this.content = content;
             LoadSprite(serviceProvider, content, "Adv_Proto");
             sprite.PlayAnimation(AniSwitch(RStand, LStand));
+            scarf.LoadContent(serviceProvider, content);
         }
 
         private void LoadSprite(IServiceProvider serviceProvider, ContentManager content, string textureSet)
@@ -220,7 +226,7 @@ namespace LoveStar.LoveStar
         public Player Update(GameTime gameTime, Tools.KeyPress keyPress, Player Player)
         {
             Proto_Movement(gameTime, keyPress);
-            FrameBasedMovement();
+            FrameBasedMovement(gameTime);
 
             return Player;
         }
@@ -230,63 +236,63 @@ namespace LoveStar.LoveStar
          * Note:
          * An idea is to check every new frame and then use that as a base to move from
          * */
-        private void FrameBasedMovement()
+        private void FrameBasedMovement(GameTime gameTime)
         {
             if (sprite.FrameIndex != prevFrame || sprite.Animation != prevAni)
             {
                 // stand to step
-                test_Movement(RStand_RRStep, LStand_LLStep, 0, 2);
-                test_Movement(RStand_RLStep, LStand_LRStep, 0, 10);
+                test_Movement(gameTime, RStand_RRStep, LStand_LLStep, 0, 2, new Vector2(0, -180));
+                test_Movement(gameTime, RStand_RLStep, LStand_LRStep, 0, 10, new Vector2(0, -180));
 
                 // step
-                test_Movement(RRStep_RLStep, LLStep_LRStep, 0, 18);
-                test_Movement(RLStep_RRStep, LRStep_LLStep, 0, 18);
-                test_Movement(RRStep_RLStep, LLStep_LRStep, 1, 18);
-                test_Movement(RLStep_RRStep, LRStep_LLStep, 1, 18);
-                test_Movement(RRStep_RLStep, LLStep_LRStep, 2, 18);
-                test_Movement(RLStep_RRStep, LRStep_LLStep, 2, 18);
+                test_Movement(gameTime, RRStep_RLStep, LLStep_LRStep, 0, 18, new Vector2(0, -180));
+                test_Movement(gameTime, RLStep_RRStep, LRStep_LLStep, 0, 18, new Vector2(0, -180));
+                test_Movement(gameTime, RRStep_RLStep, LLStep_LRStep, 1, 18, new Vector2(0, -180));
+                test_Movement(gameTime, RLStep_RRStep, LRStep_LLStep, 1, 18, new Vector2(0, -180));
+                test_Movement(gameTime, RRStep_RLStep, LLStep_LRStep, 2, 18, new Vector2(0, -180));
+                test_Movement(gameTime, RLStep_RRStep, LRStep_LLStep, 2, 18, new Vector2(0, -180));
 
                 // step to stand
-                test_Movement(RRStep_RStand, LLStep_LStand, 0, 6);
-                test_Movement(RLStep_RStand, LRStep_LStand, 0, 6);
-                test_Movement(RRStep_RStand, LLStep_LStand, 1, 6);
-                test_Movement(RLStep_RStand, LRStep_LStand, 1, 6);
+                test_Movement(gameTime, RRStep_RStand, LLStep_LStand, 0, 6, new Vector2(0, -180));
+                test_Movement(gameTime, RLStep_RStand, LRStep_LStand, 0, 6, new Vector2(0, -180));
+                test_Movement(gameTime, RRStep_RStand, LLStep_LStand, 1, 6, new Vector2(0, -180));
+                test_Movement(gameTime, RLStep_RStand, LRStep_LStand, 1, 6, new Vector2(0, -180));
 
                 // stance to run
-                test_Movement(RStance_RRRun, LStance_LLRun, 0, 19);
-                test_Movement(RStance_RLRun, LStance_LRRun, 0, 19);
-                test_Movement(RStance_RRRun, LStance_LLRun, 1, 19);
-                test_Movement(RStance_RLRun, LStance_LRRun, 1, 19);
+                test_Movement(gameTime, RStance_RRRun, LStance_LLRun, 0, 19, new Vector2(0, -180));
+                test_Movement(gameTime, RStance_RLRun, LStance_LRRun, 0, 19, new Vector2(0, -180));
+                test_Movement(gameTime, RStance_RRRun, LStance_LLRun, 1, 19, new Vector2(0, -180));
+                test_Movement(gameTime, RStance_RLRun, LStance_LRRun, 1, 19, new Vector2(0, -180));
 
                 // run
-                test_Movement(RRRun_RLRun, LLRun_LRRun, 0, 50);
-                test_Movement(RLRun_RRRun, LRRun_LLRun, 0, 50);
-                test_Movement(RRRun_RLRun, LLRun_LRRun, 1, 50);
-                test_Movement(RLRun_RRRun, LRRun_LLRun, 1, 50);
-                test_Movement(RRRun_RLRun, LLRun_LRRun, 2, 50);
-                test_Movement(RLRun_RRRun, LRRun_LLRun, 2, 50);
+                test_Movement(gameTime, RRRun_RLRun, LLRun_LRRun, 0, 50, new Vector2(0, -180));
+                test_Movement(gameTime, RLRun_RRRun, LRRun_LLRun, 0, 50, new Vector2(0, -180));
+                test_Movement(gameTime, RRRun_RLRun, LLRun_LRRun, 1, 50, new Vector2(0, -180));
+                test_Movement(gameTime, RLRun_RRRun, LRRun_LLRun, 1, 50, new Vector2(0, -180));
+                test_Movement(gameTime, RRRun_RLRun, LLRun_LRRun, 2, 50, new Vector2(0, -180));
+                test_Movement(gameTime, RLRun_RRRun, LRRun_LLRun, 2, 50, new Vector2(0, -180));
 
                 // run to stance
-                test_Movement(RRRun_RStance, LLRun_LStance, 0, 14);
-                test_Movement(RLRun_RStance, LRRun_LStance, 0, 14);
-                test_Movement(RRRun_RStance, LLRun_LStance, 1, 14);
-                test_Movement(RLRun_RStance, LRRun_LStance, 1, 14);
+                test_Movement(gameTime, RRRun_RStance, LLRun_LStance, 0, 14, new Vector2(0, -180));
+                test_Movement(gameTime, RLRun_RStance, LRRun_LStance, 0, 14, new Vector2(0, -180));
+                test_Movement(gameTime, RRRun_RStance, LLRun_LStance, 1, 14, new Vector2(0, -180));
+                test_Movement(gameTime, RLRun_RStance, LRRun_LStance, 1, 14, new Vector2(0, -180));
 
                 // step to run
-                test_Movement(RRStep_RLRun, LLStep_LRRun, 0, 12);
-                test_Movement(RLStep_RRRun, LRStep_LLRun, 0, 12);
-                test_Movement(RRStep_RLRun, LLStep_LRRun, 1, 12);
-                test_Movement(RLStep_RRRun, LRStep_LLRun, 1, 12);
-                test_Movement(RRStep_RLRun, LLStep_LRRun, 2, 12);
-                test_Movement(RLStep_RRRun, LRStep_LLRun, 2, 12);
+                test_Movement(gameTime, RRStep_RLRun, LLStep_LRRun, 0, 12, new Vector2(0, -180));
+                test_Movement(gameTime, RLStep_RRRun, LRStep_LLRun, 0, 12, new Vector2(0, -180));
+                test_Movement(gameTime, RRStep_RLRun, LLStep_LRRun, 1, 12, new Vector2(0, -180));
+                test_Movement(gameTime, RLStep_RRRun, LRStep_LLRun, 1, 12, new Vector2(0, -180));
+                test_Movement(gameTime, RRStep_RLRun, LLStep_LRRun, 2, 12, new Vector2(0, -180));
+                test_Movement(gameTime, RLStep_RRRun, LRStep_LLRun, 2, 12, new Vector2(0, -180));
 
                 // run to step
-                test_Movement(RRRun_RLStep, LLRun_LRStep, 0, 10);
-                test_Movement(RLRun_RRStep, LRRun_LLStep, 0, 10);
-                test_Movement(RRRun_RLStep, LLRun_LRStep, 1, 10);
-                test_Movement(RLRun_RRStep, LRRun_LLStep, 1, 10);
-                test_Movement(RRRun_RLStep, LLRun_LRStep, 2, 10);
-                test_Movement(RLRun_RRStep, LRRun_LLStep, 2, 10);
+                test_Movement(gameTime, RRRun_RLStep, LLRun_LRStep, 0, 10, new Vector2(0, -180));
+                test_Movement(gameTime, RLRun_RRStep, LRRun_LLStep, 0, 10, new Vector2(0, -180));
+                test_Movement(gameTime, RRRun_RLStep, LLRun_LRStep, 1, 10, new Vector2(0, -180));
+                test_Movement(gameTime, RLRun_RRStep, LRRun_LLStep, 1, 10, new Vector2(0, -180));
+                test_Movement(gameTime, RRRun_RLStep, LLRun_LRStep, 2, 10, new Vector2(0, -180));
+                test_Movement(gameTime, RLRun_RRStep, LRRun_LLStep, 2, 10, new Vector2(0, -180));
             }
             prevFrame = sprite.FrameIndex;
             prevAni = sprite.Animation;
@@ -307,7 +313,7 @@ namespace LoveStar.LoveStar
         }
 
         // being used instead og contextualMovement due to sprites being mirrored at thi point
-        private void test_Movement(Tools.Animation RightAni, Tools.Animation LeftAni, int frame, int x_positionChange)
+        private void test_Movement(GameTime gameTime, Tools.Animation RightAni, Tools.Animation LeftAni, int frame, int x_positionChange, Vector2 scarfOffset)
         {
             if (frame == sprite.FrameIndex)
             {
@@ -319,7 +325,10 @@ namespace LoveStar.LoveStar
                 {
                     position.X -= x_positionChange;
                 }
+                scarfPosition = position + scarfOffset;
+                scarf.Update(gameTime, scarfPosition);
             }
+            
         }
 
         private void Proto_Movement(GameTime gameTime, Tools.KeyPress keyPress)
@@ -822,7 +831,9 @@ namespace LoveStar.LoveStar
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            scarf.DrawBack(gameTime, spriteBatch);
             sprite.Draw(gameTime, spriteBatch, position, SpriteEffects.None, 0);
+            scarf.DrawFront(gameTime, spriteBatch);
         }
     }
     
