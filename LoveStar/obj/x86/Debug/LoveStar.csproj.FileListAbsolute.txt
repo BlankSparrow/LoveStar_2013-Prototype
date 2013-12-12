@@ -119,3 +119,4 @@ C:\Users\Jeremy\GitHub\LoveStar\LoveStar\bin\WindowsGL\Debug\Lidgren.Network.dll
 C:\Users\Jeremy\GitHub\LoveStar\LoveStar\bin\WindowsGL\Debug\MonoGame.Framework.dll
 C:\Users\Jeremy\GitHub\LoveStar\LoveStar\bin\WindowsGL\Debug\OpenTK.dll
 C:\Users\Jeremy\GitHub\LoveStar\LoveStar\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar\bin\WindowsGL\Debug\Content\Scarf\scarfEnd.png

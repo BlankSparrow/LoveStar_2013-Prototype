@@ -34,6 +34,8 @@ namespace LoveStar.LoveStar
 
         private Vector2 position;
         private Texture2D scarfTexture;
+        private Texture2D scarfEnd;
+        private Vector2 scarfSectionSize = new Vector2(10, 15);
         private int length = 1;
         private float gravity = 4;
         private float stiffness = 0.0f;
@@ -65,15 +67,40 @@ namespace LoveStar.LoveStar
         public void LoadContent(IServiceProvider serviceProvider, ContentManager content)
         {
             this.content = content;
-            scarfTexture = content.Load<Texture2D>("Scarf/Section");
+            scarfEnd = content.Load<Texture2D>("Scarf/scarfEnd");
+            scarfTexture = CreateTexture();
+        }
+
+        public Texture2D CreateTexture()
+        {
+            Vector2 scarfSize = scarfSectionSize;
+            Texture2D texture = new Texture2D(GraphicsDevice, (int)scarfSize.X, (int)scarfSize.Y);
+
+            Color[] data = new Color[((int)scarfSize.X) * ((int)scarfSize.Y)];
+
+            //Colour the entire texture transparent first.
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (i % scarfSectionSize.X == 0 || i % scarfSectionSize.X == scarfSectionSize.X - 1 || i > (scarfSectionSize.X * scarfSectionSize.Y) - scarfSectionSize.X * 2)
+                {
+                    data[i] = Color.Black;
+                }
+                else
+                {
+                    data[i] = Color.White;
+                }
+            }
+
+            texture.SetData(data);
+            return texture;
         }
 
         public void Update(GameTime gameTime, Vector2 position)
         {
             this.position = position;
 
-            updateScarf(gameTime, position, scarf1, 0.5f, 0.6f);
-            updateScarf(gameTime, position, scarf2, 0.6f, 0.51f);
+            updateScarf(gameTime, position, scarf1, 0.4f, 0.5f);
+            updateScarf(gameTime, position, scarf2, 0.5f, 0.5f);
             base.Update(gameTime);
         }
 
@@ -96,27 +123,33 @@ namespace LoveStar.LoveStar
                 scarf[i].position.Y += scarf[i].vy;
 
                 scarf[i].angle = (float)Math.Atan2(scarf[i - 1].position.Y - scarf[i].position.Y,
-                    scarf[i - 1].position.X - scarf[i].position.X);
+                    scarf[i - 1].position.X - scarf[i].position.X) + 1.5f;
 
                 scarf[i].position.X = MathHelper.Lerp(scarf[i].position.X, scarf[i - 1].position.X - (int)(Math.Cos(scarf[i].angle) * length), lerpX);
                 scarf[i].position.Y = MathHelper.Lerp(scarf[i].position.Y, scarf[i - 1].position.Y - (int)(Math.Sin(scarf[i].angle) * length - 1), lerpY);
             }
         }
 
-        public void DrawBack(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (section s in scarf2)
+            for (int i = 1; i < scarf2.Count; i++)
             {
-                spriteBatch.Draw(scarfTexture, new Rectangle((int)s.position.X, (int)s.position.Y, scarfTexture.Width, scarfTexture.Height), null, new Color(0, 110, 250), (float)s.angle + 1.5f, new Vector2(10, 10), SpriteEffects.None, 0);
+                spriteBatch.Draw(scarfTexture, new Rectangle((int)scarf2[i].position.X, (int)scarf2[i].position.Y, (int)scarfSectionSize.X + i / 2 + 8, (int)scarfSectionSize.Y),
+                    null, new Color(106, 156, 210), (float)scarf2[i].angle, new Vector2(5, 1), SpriteEffects.None, 0);
+            }
+            for (int i = 1; i < scarf1.Count; i++)
+            {
+                if (i == scarf1.Count - 1)
+                {
+                    spriteBatch.Draw(scarfEnd, new Rectangle((int)scarf1[i].position.X, (int)scarf1[i].position.Y, (int)scarfEnd.Width , (int)scarfEnd.Height),
+                    null, Color.White, (float)scarf1[i].angle, new Vector2((int)scarfEnd.Width/2, 1), SpriteEffects.None, 0);
+                }
+                else
+                {
+                    spriteBatch.Draw(scarfTexture, new Rectangle((int)scarf1[i].position.X, (int)scarf1[i].position.Y, (int)scarfSectionSize.X + i /2 + 8, (int)scarfSectionSize.Y),
+                        null, new Color(140, 184, 233), (float)scarf1[i].angle, new Vector2(5, 1), SpriteEffects.None, 0);
+                }
             }
         }
-        public void DrawFront(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            foreach (section s in scarf1)
-            {
-                spriteBatch.Draw(scarfTexture, new Rectangle((int)s.position.X, (int)s.position.Y, scarfTexture.Width, scarfTexture.Height), null, new Color(30, 140, 256), (float)s.angle + 1.5f, new Vector2(10, 10), SpriteEffects.None, 0);
-            }
-        }
-
     }
 }
