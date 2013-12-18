@@ -40,6 +40,7 @@ namespace LoveStar.LoveStar
         private float gravity = 4;
         private float stiffness = 0.0f;
         private float dampening = 0.5f;
+        private bool frozen = false;
 
         List<section> scarf1 = new List<section>();
         List<section> scarf2 = new List<section>();
@@ -106,6 +107,7 @@ namespace LoveStar.LoveStar
 
         public void updateScarf(GameTime gameTime, Vector2 position, List<section> scarf, float lerpX, float lerpY)
         {
+            if(this.frozen) return;
             scarf[0].angle = (float)Math.Atan2((double)(position.Y - scarf[0].position.Y), (double)(position.X - scarf[0].position.X));
             scarf[0].position = position;
 
@@ -132,6 +134,7 @@ namespace LoveStar.LoveStar
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            if(this.frozen) return;
             for (int i = 1; i < scarf2.Count; i++)
             {
                 spriteBatch.Draw(scarfTexture, new Rectangle((int)scarf2[i].position.X, (int)scarf2[i].position.Y, (int)scarfSectionSize.X + i / 2 + 8, (int)scarfSectionSize.Y),
@@ -150,6 +153,32 @@ namespace LoveStar.LoveStar
                         null, new Color(140, 184, 233), (float)scarf1[i].angle, new Vector2(5, 1), SpriteEffects.None, 0);
                 }
             }
+        }
+        
+        // Move all the positions to relative and block the update loop
+        public void FreezeScarf(Vector2 playerPosition) {
+            this.frozen = true;
+            for(int i = 0; i < scarf2.Count; i++) {
+                scarf2[i].position.X -= playerPosition.X;
+                scarf2[i].position.Y -= playerPosition.Y;
+            }
+            for(int i = 0; i < scarf1.Count; i++) {
+                scarf1[i].position.X -= playerPosition.X;
+                scarf1[i].position.Y -= playerPosition.Y;
+            }
+        }
+        
+        // Move the positions back to absoloute based on new player position, and unblock updates
+        public void UnfreezeScarf(Vector2 playerPosition) {
+            for(int i = 0; i < scarf2.Count; i++) {
+                scarf2[i].position.X += playerPosition.X;
+                scarf2[i].position.Y += playerPosition.Y;
+            }
+            for(int i = 0; i < scarf1.Count; i++) {
+                scarf1[i].position.X += playerPosition.X;
+                scarf1[i].position.Y += playerPosition.Y;
+            }
+            this.frozen = false;
         }
     }
 }
