@@ -147,7 +147,7 @@ namespace LoveStar.LoveStar
             nextStep = Next_Step.right;
             scarfPosition = position - new Vector2(0, -180);
 
-            scarf = new Scarf(game, position);
+            scarf = new Scarf(game, scarfPosition);
             setCanMove(true,true);
         }
 

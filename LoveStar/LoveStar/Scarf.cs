@@ -30,12 +30,10 @@ namespace LoveStar.LoveStar
         private ContentManager content;
         private Game game;
 
-
-
+        private Vector2 scarfSectionSize = new Vector2(10, 10);
         private Vector2 position;
         private Texture2D scarfTexture;
         private Texture2D scarfEnd;
-        private Vector2 scarfSectionSize = new Vector2(10, 15);
         private int length = 1;
         private float gravity = 4;
         private float stiffness = 0.0f;
@@ -69,7 +67,7 @@ namespace LoveStar.LoveStar
         {
             this.content = content;
             scarfEnd = content.Load<Texture2D>("Scarf/scarfEnd");
-            scarfTexture = CreateTexture();
+            
         }
 
         public Texture2D CreateTexture()
@@ -79,17 +77,12 @@ namespace LoveStar.LoveStar
 
             Color[] data = new Color[((int)scarfSize.X) * ((int)scarfSize.Y)];
 
+            
+
             //Colour the entire texture transparent first.
             for (int i = 0; i < data.Length; i++)
             {
-                if (i % scarfSectionSize.X == 0 || i % scarfSectionSize.X == scarfSectionSize.X - 1 || i > (scarfSectionSize.X * scarfSectionSize.Y) - scarfSectionSize.X * 2)
-                {
-                    data[i] = Color.Black;
-                }
-                else
-                {
-                    data[i] = Color.White;
-                }
+                data[i] = Color.White;
             }
 
             texture.SetData(data);
@@ -100,8 +93,9 @@ namespace LoveStar.LoveStar
         {
             this.position = position;
 
-            updateScarf(gameTime, position, scarf1, 0.4f, 0.5f);
-            updateScarf(gameTime, position, scarf2, 0.5f, 0.5f);
+            updateScarf(gameTime, position, scarf1, 0.4f, 0.4f);
+            updateScarf(gameTime, position, scarf2, 0.5f, 0.3f);
+            scarfTexture = CreateTexture();
             base.Update(gameTime);
         }
 
@@ -127,17 +121,24 @@ namespace LoveStar.LoveStar
                 scarf[i].angle = (float)Math.Atan2(scarf[i - 1].position.Y - scarf[i].position.Y,
                     scarf[i - 1].position.X - scarf[i].position.X) + 1.5f;
 
+
+                scarf[i].position.X = MathHelper.Lerp(scarf[i - 1].position.X, scarf[i].position.X - (int)(Math.Cos(scarf[i].angle) * length), lerpX);
+                scarf[i].position.Y = MathHelper.Lerp(scarf[i - 1].position.Y, scarf[i].position.Y - (int)(Math.Sin(scarf[i].angle) * length - 1), lerpY);
+
+                /*
                 scarf[i].position.X = MathHelper.Lerp(scarf[i].position.X, scarf[i - 1].position.X - (int)(Math.Cos(scarf[i].angle) * length), lerpX);
                 scarf[i].position.Y = MathHelper.Lerp(scarf[i].position.Y, scarf[i - 1].position.Y - (int)(Math.Sin(scarf[i].angle) * length - 1), lerpY);
+                 */
             }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if(this.frozen) return;
+            
             for (int i = 1; i < scarf2.Count; i++)
             {
-                spriteBatch.Draw(scarfTexture, new Rectangle((int)scarf2[i].position.X, (int)scarf2[i].position.Y, (int)scarfSectionSize.X + i / 2 + 8, (int)scarfSectionSize.Y),
+                spriteBatch.Draw(scarfTexture, new Rectangle((int)scarf2[i].position.X, (int)scarf2[i].position.Y, (int)scarfSectionSize.X + i / 2 + 4, (int)scarfSectionSize.Y),
                     null, new Color(106, 156, 210), (float)scarf2[i].angle, new Vector2(5, 1), SpriteEffects.None, 0);
             }
             for (int i = 1; i < scarf1.Count; i++)
@@ -153,6 +154,13 @@ namespace LoveStar.LoveStar
                         null, new Color(140, 184, 233), (float)scarf1[i].angle, new Vector2(5, 1), SpriteEffects.None, 0);
                 }
             }
+            
+
+            spriteBatch.Draw(scarfTexture, scarf1[0].position, new Color(140, 184, 233));
+
+            spriteBatch.Draw(scarfEnd, new Rectangle((int)scarf1[scarf1.Count - 1].position.X, (int)scarf1[scarf1.Count - 1].position.Y, (int)scarfEnd.Width, (int)scarfEnd.Height),
+                null, Color.White, (float)scarf1[scarf1.Count- 1].angle, new Vector2((int)scarfEnd.Width / 2, 1), SpriteEffects.None, 0);
+
         }
         
         // Move all the positions to relative and block the update loop
