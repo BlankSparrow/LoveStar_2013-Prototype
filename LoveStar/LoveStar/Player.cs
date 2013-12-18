@@ -121,6 +121,11 @@ namespace LoveStar.LoveStar
         private LoveStar.Scarf scarf;
         private Vector2 scarfPosition;
 
+        public LoveStar.Scarf getScarf() 
+        {
+            return this.scarf;
+        }
+
         public void setCanMove(bool canMoveRight, bool canMoveLeft)
         {
             this.canMoveRight = canMoveRight;
