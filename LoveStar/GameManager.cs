@@ -46,7 +46,9 @@ namespace LoveStar
             level = level.Update(gameTime, keyPress, level);
             if (level.shouldPlayerShift() == true)
             {
+                player.getScarf().FreezeScarf(player.Position);
                 player.Position = level.getPlayerStartPosition();
+                player.getScarf().UnfreezeScarf(player.Position);
                 Tools.Camera.offset.X = player.Position.X - (GraphicsDevice.Viewport.Width / 2);
             }
             player = player.Update(gameTime, keyPress, player);
