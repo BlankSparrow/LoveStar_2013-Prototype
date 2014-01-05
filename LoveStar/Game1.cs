@@ -35,6 +35,7 @@ namespace LoveStar
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         ContentManager content;
+        BasicEffect basicEffect;
 
         LaunchManager launchManager;
         GameManager gameManager;
@@ -54,6 +55,14 @@ namespace LoveStar
 
             graphics.PreferredBackBufferWidth = 900;
             graphics.PreferredBackBufferHeight = 460;
+
+
+            basicEffect = new BasicEffect(GraphicsDevice);
+            basicEffect.VertexColorEnabled = true;
+            basicEffect.Projection = Matrix.CreateOrthographicOffCenter
+               (0, GraphicsDevice.Viewport.Width,     // left, right
+                GraphicsDevice.Viewport.Height, 0,    // bottom, top
+                0, 1);                                       // near, far plane
 
             IsMouseVisible = true;
             windowReturnInfo.windowTransition = false;
@@ -124,6 +133,7 @@ namespace LoveStar
             GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend,
                 null, null, null, null, Tools.Camera.GetMatrix());
+            
 
             switch (gameDrawState)
             {
@@ -133,6 +143,7 @@ namespace LoveStar
 
                 case Game_Draw_State.Game:
                     gameManager.Draw(gameTime, spriteBatch);
+                    basicEffect.CurrentTechnique.Passes[0].Apply();
                     break;
             }
             
