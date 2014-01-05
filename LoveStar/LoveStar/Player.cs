@@ -118,10 +118,11 @@ namespace LoveStar.LoveStar
         private Tools.Animation LRRun_LLStep;
         private Tools.Animation LLRun_LRStep;
 
-        private LoveStar.Scarf scarf;
+        //private LoveStar.Scarf scarf;
+        private LoveStar.VectorScarf scarf;
         private Vector2 scarfPosition;
 
-        public LoveStar.Scarf getScarf() 
+        public LoveStar.VectorScarf getScarf() 
         {
             return this.scarf;
         }
@@ -147,7 +148,7 @@ namespace LoveStar.LoveStar
             nextStep = Next_Step.right;
             scarfPosition = position - new Vector2(0, -180);
 
-            scarf = new Scarf(game, scarfPosition);
+            scarf = new VectorScarf(game, scarfPosition);
             setCanMove(true,true);
         }
 
@@ -318,10 +319,10 @@ namespace LoveStar.LoveStar
                 {
                     position.X -= x_positionChange;
                 }
+
                 scarfPosition = position + scarfOffset;
                 scarf.Update(gameTime, scarfPosition);
             }
-            
         }
 
         private void Proto_Movement(GameTime gameTime, Tools.KeyPress keyPress)

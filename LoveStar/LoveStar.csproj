@@ -41,6 +41,7 @@
     <Compile Include="LoveStar\Level.cs" />
     <Compile Include="LoveStar\Player.cs" />
     <Compile Include="LoveStar\Scarf.cs" />
+    <Compile Include="LoveStar\VectorScarf.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\Animation.cs" />

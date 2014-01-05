@@ -124,11 +124,6 @@ namespace LoveStar.LoveStar
 
                 scarf[i].position.X = MathHelper.Lerp(scarf[i - 1].position.X, scarf[i].position.X - (int)(Math.Cos(scarf[i].angle) * length), lerpX);
                 scarf[i].position.Y = MathHelper.Lerp(scarf[i - 1].position.Y, scarf[i].position.Y - (int)(Math.Sin(scarf[i].angle) * length - 1), lerpY);
-
-                /*
-                scarf[i].position.X = MathHelper.Lerp(scarf[i].position.X, scarf[i - 1].position.X - (int)(Math.Cos(scarf[i].angle) * length), lerpX);
-                scarf[i].position.Y = MathHelper.Lerp(scarf[i].position.Y, scarf[i - 1].position.Y - (int)(Math.Sin(scarf[i].angle) * length - 1), lerpY);
-                 */
             }
         }
 
