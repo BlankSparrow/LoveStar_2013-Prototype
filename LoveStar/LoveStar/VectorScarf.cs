@@ -12,7 +12,6 @@ namespace LoveStar.LoveStar
 {
     class Section
     {
-        public Texture2D texture;
         public Vector2 position;
         public Vector2 prevPosition;
         public Vector2 velocity;
@@ -26,6 +25,7 @@ namespace LoveStar.LoveStar
         public Section(Vector2 position, float mass, float gravity)
         {
             this.position = position;
+            this.prevPosition = position;
             this.velocity.X = 0;
             this.velocity.Y = 0;
             this.mass = mass;
@@ -43,11 +43,6 @@ namespace LoveStar.LoveStar
             velocity.Y = damping * (velocity.Y + ay);
             position.Y += velocity.Y;
         }
-
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            prevPosition = position;
-        }
     }
 
     class VectorScarf : Microsoft.Xna.Framework.DrawableGameComponent
@@ -57,7 +52,7 @@ namespace LoveStar.LoveStar
 
         private bool frozen = false;
 
-        BasicEffect basicEffect;
+        
         List<VertexPositionColor> vertList;
         List<VertexPositionColor> vertList2;
         private Texture2D scarfEnd;
@@ -76,22 +71,16 @@ namespace LoveStar.LoveStar
         {
             this.game = game;
             this.base_Position = position;
-            basicEffect = new BasicEffect(game.GraphicsDevice);
-            basicEffect.VertexColorEnabled = true;
-            basicEffect.Projection = Matrix.CreateOrthographicOffCenter
-               (0, game.GraphicsDevice.Viewport.Width,     // left, right
-                game.GraphicsDevice.Viewport.Height, 0,    // bottom, top
-                0, 1);                                         // near, far plane
 
             vertList = new List<VertexPositionColor>();
             vertList2 = new List<VertexPositionColor>();
 
-            //RasterizerState rs = new RasterizerState();
-            //rs.CullMode = CullMode.None;
-            //GraphicsDevice.RasterizerState = rs;
+            RasterizerState rs = new RasterizerState();
+            rs.CullMode = CullMode.None;
+            GraphicsDevice.RasterizerState = rs;
 
             // TODO: Add your initialization logic here
-            NumOfSections(13);
+            NumOfSections(10);
         }
 
         public void NumOfSections(int num)
@@ -118,12 +107,13 @@ namespace LoveStar.LoveStar
             sections[1].Update(sections[0].position.X, sections[0].position.Y, sections[1].mass);
             for (int i = 2; i < sections.Count; i++)
             {
-                //sections[i - 1].Update(sections[i - 2].position.X, sections[i - 2].position.Y, sections[i - 1].mass);
                 sections[i].Update(sections[i - 1].position.X, sections[i - 1].position.Y, sections[i].mass);
                 if (i == sections.Count - 1)
                 {
                     sections[i].Update(sections[i - 1].position.X, sections[i - 1].position.Y, sections[i].mass);
                 }
+                sections[i].angle = (float)Math.Atan2(sections[i - 1].position.Y - sections[i].position.Y,
+                    sections[i - 1].position.X - sections[i].position.X) + 1.5f;
             }
 
 
@@ -142,13 +132,11 @@ namespace LoveStar.LoveStar
                 {
                     adjustAngle = -s.radius / 2;
                 }
-                vertList.Add(new VertexPositionColor(new Vector3(s.position.X - s.radius / 2 - j, s.position.Y - adjustAngle, 0), Color.SkyBlue));
-                vertList.Add(new VertexPositionColor(new Vector3(s.position.X + s.radius / 2 + j, s.position.Y + adjustAngle, 0), Color.SkyBlue));
-                vertList2.Add(new VertexPositionColor(new Vector3(s.position.X - s.radius / 2 - j, s.position.Y - adjustAngle, 0), Color.Red));
-                vertList2.Add(new VertexPositionColor(new Vector3(s.position.X + s.radius / 2 + j, s.position.Y + adjustAngle, 0), Color.Red));
+                vertList.Add(new VertexPositionColor(new Vector3(s.position.X - s.radius / 1.5f - j, s.position.Y - adjustAngle, 0), Color.SkyBlue));
+                vertList.Add(new VertexPositionColor(new Vector3(s.position.X + s.radius / 1.5f + j, s.position.Y + adjustAngle, 0), Color.SkyBlue));
+                vertList2.Add(new VertexPositionColor(new Vector3(s.position.X - s.radius / 1.5f - j, s.position.Y - adjustAngle, 0), Color.Red));
+                vertList2.Add(new VertexPositionColor(new Vector3(s.position.X + s.radius / 1.5f + j, s.position.Y + adjustAngle, 0), Color.Red));
             }
-
-            base.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -160,8 +148,10 @@ namespace LoveStar.LoveStar
             game.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.TriangleStrip, vertList.ToArray(), 0, sections.Count * 2 - 2);
             //game.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(PrimitiveType.LineList, vertList2.ToArray(), 0, sections.Count - 1);
 
-            spriteBatch.Draw(scarfEnd, sections[sections.Count - 1].position, Color.White); 
-            base.Draw(gameTime);
+            //spriteBatch.Draw(scarfEnd, sections[sections.Count - 1].position - new Vector2(scarfEnd.Width/2, scarfEnd.Height/2), Color.White);
+
+            spriteBatch.Draw(scarfEnd, new Rectangle((int)sections[sections.Count - 1].position.X, (int)sections[sections.Count - 1].position.Y, scarfEnd.Width, scarfEnd.Height),
+                null, Color.White, (float)sections[sections.Count - 1].angle, new Vector2(scarfEnd.Width / 2, scarfEnd.Height / 2), SpriteEffects.None, 0);
         }
 
         // Move all the positions to relative and block the update loop

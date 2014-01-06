@@ -1,0 +1,13 @@
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\OpenTK.dll
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\obj\x86\Debug\LoveStar_Point.csprojResolveAssemblyReference.cache
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\obj\x86\Debug\LoveStar_Point.exe
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\obj\x86\Debug\LoveStar_Point.pdb
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\LoveStar_Point.exe
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\LoveStar_Point.pdb
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\Content\Level\Level_01.png
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\Content\Level\Level_02.png
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\Content\Level\Level_03.png
+C:\Users\Jeremy\GitHub\LoveStar\LoveStar_Point\bin\WindowsGL\Debug\Content\Level\Level_14.png
