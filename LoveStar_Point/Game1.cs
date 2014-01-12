@@ -26,6 +26,7 @@ namespace LoveStar_Point
         KeyPress keyPress;
         Level level;
         List<Level> levels;
+        Player player;
 
         public Game1()
             : base()
@@ -61,7 +62,7 @@ namespace LoveStar_Point
             // TODO: Add your initialization logic here
             levels = LoadLevels();
             level = levels[0];
-            //player = new Player(this, graphics);
+            player = new Player(this, graphics);
             base.Initialize();
         }
 
@@ -93,7 +94,7 @@ namespace LoveStar_Point
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            player.LoadContent(Services, content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -124,7 +125,7 @@ namespace LoveStar_Point
             }
 
             level.Update(gameTime, keyPress);
-
+            player.Update(gameTime, keyPress, player);
             base.Update(gameTime);
         }
 
@@ -140,6 +141,7 @@ namespace LoveStar_Point
             spriteBatch.Begin();
             basicEffect.CurrentTechnique.Passes[0].Apply();
             level.Draw(gameTime, spriteBatch);
+            player.Draw(gameTime, spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }

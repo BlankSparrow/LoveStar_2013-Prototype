@@ -43,6 +43,7 @@
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\Level_01.cs" />
     <Compile Include="Levels\Level_02.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RectangleExtensions.cs" />
@@ -76,50 +77,138 @@
     <Content Include="Content\Level\Level_14.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Player\Adv_Proto\Left\LLRun_LRRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LLRun_LRStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LLRun_LStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LLStep_LRRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LLStep_LRStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LLStep_LStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LRRun_LLRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LRRun_LLStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LRRun_LStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LRStep_LLRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LRStep_LLStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LRStep_LStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStance_LLRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStance_LRRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStance_LStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStance_RStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStand_LLStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStand_LRStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStand_LStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Left\LStand_RStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RLRun_RRRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RLRun_RRStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RLRun_RStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RLStep_RRRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RLStep_RRStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RLStep_RStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RRRun_RLRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RRRun_RLStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RRRun_RStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RRStep_RLRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RRStep_RLStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RRStep_RStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStance_LStance.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStance_RLRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStance_RRRun.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStance_RStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStand_LStand.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStand_RLStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStand_RRStep.png" />
-    <Content Include="Content\Player\Adv_Proto\Right\RStand_RStance.png" />
+    <Content Include="Content\Player\Adv_Proto\Left\LLRun_LRRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LLRun_LRStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LLRun_LStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LLStep_LRRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LLStep_LRStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LLStep_LStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LRRun_LLRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LRRun_LLStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LRRun_LStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LRStep_LLRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LRStep_LLStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LRStep_LStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStance_LLRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStance_LRRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStance_LStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStance_RStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStand_LLStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStand_LRStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStand_LStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Left\LStand_RStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RLRun_RRRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RLRun_RRStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RLRun_RStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RLStep_RRRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RLStep_RRStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RLStep_RStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RRRun_RLRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RRRun_RLStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RRRun_RStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RRStep_RLRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RRStep_RLStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RRStep_RStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStance_LStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStance_RLRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStance_RRRun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStance_RStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStand_LStand.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStand_RLStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStand_RRStep.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Player\Adv_Proto\Right\RStand_RStance.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Player\Player.png" />
     <Content Include="Content\Player\Proto_Char\Stand.png" />
     <Content Include="Content\Player\Proto_Char\Walk.png" />
