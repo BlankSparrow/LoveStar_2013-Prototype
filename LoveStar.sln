@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoveStar", "LoveStar\LoveStar.csproj", "{8C8DC3EB-5B93-4E33-A643-5C34AB36751E}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoveStar", "LoveStar\LoveStar\LoveStar.csproj", "{732BF55B-295E-4780-A94E-A8834886E13A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoveStar_Point", "LoveStar_Point\LoveStar_Point.csproj", "{B7A45452-99CB-4755-9184-1382AE3D7D53}"
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "LoveStarContent", "LoveStar\LoveStarContent\LoveStarContent.contentproj", "{7423E2B0-2E60-4E6A-8FD0-DFAB332BC1FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,14 +11,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8C8DC3EB-5B93-4E33-A643-5C34AB36751E}.Debug|x86.ActiveCfg = Debug|x86
-		{8C8DC3EB-5B93-4E33-A643-5C34AB36751E}.Debug|x86.Build.0 = Debug|x86
-		{8C8DC3EB-5B93-4E33-A643-5C34AB36751E}.Release|x86.ActiveCfg = Release|x86
-		{8C8DC3EB-5B93-4E33-A643-5C34AB36751E}.Release|x86.Build.0 = Release|x86
-		{B7A45452-99CB-4755-9184-1382AE3D7D53}.Debug|x86.ActiveCfg = Debug|x86
-		{B7A45452-99CB-4755-9184-1382AE3D7D53}.Debug|x86.Build.0 = Debug|x86
-		{B7A45452-99CB-4755-9184-1382AE3D7D53}.Release|x86.ActiveCfg = Release|x86
-		{B7A45452-99CB-4755-9184-1382AE3D7D53}.Release|x86.Build.0 = Release|x86
+		{732BF55B-295E-4780-A94E-A8834886E13A}.Debug|x86.ActiveCfg = Debug|x86
+		{732BF55B-295E-4780-A94E-A8834886E13A}.Debug|x86.Build.0 = Debug|x86
+		{732BF55B-295E-4780-A94E-A8834886E13A}.Release|x86.ActiveCfg = Release|x86
+		{732BF55B-295E-4780-A94E-A8834886E13A}.Release|x86.Build.0 = Release|x86
+		{7423E2B0-2E60-4E6A-8FD0-DFAB332BC1FD}.Debug|x86.ActiveCfg = Debug|x86
+		{7423E2B0-2E60-4E6A-8FD0-DFAB332BC1FD}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
